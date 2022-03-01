@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/aseara/baigo/lesson28"
+)
 
 type MyInterface interface {
 	M1()
@@ -26,4 +30,5 @@ func main() {
 	v2, _ := i.(MyInterface)
 	fmt.Printf("the type of v2 is %T\n", v2) // the type of v2 is <nil>
 	// v2 = 13 //  cannot use 1 (type int) as type MyInterface in assignment: int does not implement MyInterface (missing M1   method)
+	lesson28.M1()
 }
