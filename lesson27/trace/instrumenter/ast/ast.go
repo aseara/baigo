@@ -41,7 +41,7 @@ func (a instrumenter) Instrument(filename string) ([]byte, error) {
 
 	astutil.AddImport(fset, curAST, a.trceImport)
 
-	a.addDeferTraceIntoFuncDecls(curAST)
+	a.addDeferTrace(curAST)
 
 	buf := &bytes.Buffer{}
 	err = format.Node(buf, fset, curAST)
@@ -61,7 +61,7 @@ func hasFuncDecl(f *ast.File) bool {
 	return false
 }
 
-func (a instrumenter) addDeferTraceIntoFuncDecls(f *ast.File) {
+func (a instrumenter) addDeferTrace(f *ast.File) {
 	for _, decl := range f.Decls {
 		fd, ok := decl.(*ast.FuncDecl)
 		if ok {
