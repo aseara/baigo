@@ -6,6 +6,24 @@ import (
 	"time"
 )
 
+func main() {
+	var wg sync.WaitGroup
+	c := make(chan int, 3)
+	wg.Add(2)
+
+	go func() {
+		produce(c)
+		wg.Done()
+	}()
+
+	go func() {
+		consumer(c)
+		wg.Done()
+	}()
+
+	wg.Wait()
+}
+
 func produce(c chan<- int) {
 	i := int(1)
 	for {
@@ -57,20 +75,4 @@ func tryRecv(c <-chan int) (int, bool) {
 	}
 }
 
-func main() {
-	var wg sync.WaitGroup
-	c := make(chan int, 3)
-	wg.Add(2)
 
-	go func() {
-		produce(c)
-		wg.Done()
-	}()
-
-	go func() {
-		consumer(c)
-		wg.Done()
-	}()
-
-	wg.Wait()
-}
