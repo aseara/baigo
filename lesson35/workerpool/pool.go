@@ -11,6 +11,9 @@ var ErrWorkerPoolFreed = errors.New("workpool freed")
 const _defaultCapacity = 12
 const _maxCapacity = 1000
 
+// Task task 实例
+type Task func()
+
 // Pool worker pool 实例
 type Pool struct {
 	capacity int
