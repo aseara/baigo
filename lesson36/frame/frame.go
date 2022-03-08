@@ -31,6 +31,7 @@ func NewMyFrameCodec() StreamFrameCodec {
 }
 
 func (p *myFrameCodec) Encode(w io.Writer, f Payload) error {
+
 	totalLen := int32(len(f)) + 4
 	if totalLen < 4 {
 		return fmt.Errorf("totalLen of payload is out of range: %d", totalLen)
@@ -46,7 +47,6 @@ func (p *myFrameCodec) Encode(w io.Writer, f Payload) error {
 	if n != len(f) {
 		return ErrShortWrite
 	}
-
 	return nil
 }
 

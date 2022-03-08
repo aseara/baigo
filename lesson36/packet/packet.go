@@ -3,6 +3,7 @@ package packet
 import (
 	"bytes"
 	"fmt"
+	"sync"
 )
 
 const (
@@ -63,6 +64,18 @@ func (s *SubmitAck) Encode() ([]byte, error) {
 	return bytes.Join([][]byte{[]byte(s.ID[:8]), {s.Result}}, nil), nil
 }
 
+var SubmitPool = sync.Pool{
+	New: func() interface{} {
+		return &Submit{}
+	},
+}
+
+var SubmitAckPool = sync.Pool{
+	New: func() interface{} {
+		return &SubmitAck{}
+	},
+}
+
 // Decode decode
 func Decode(packet []byte) (Packet, error) {
 	commandID := packet[0]
@@ -74,19 +87,19 @@ func Decode(packet []byte) (Packet, error) {
 	case CommandConnAck:
 		return nil, nil
 	case CommandSubmit:
-		s := Submit{}
+		s := SubmitPool.Get().(*Submit)
 		err := s.Decode(pktBody)
 		if err != nil {
 			return nil, err
 		}
-		return &s, nil
+		return s, nil
 	case CommandSubmitAck:
-		s := SubmitAck{}
+		s := SubmitAckPool.Get().(*SubmitAck)
 		err := s.Decode(pktBody)
 		if err != nil {
 			return nil, err
 		}
-		return &s, nil
+		return s, nil
 	default:
 		return nil, fmt.Errorf("unknown commandID [%d]", commandID)
 	}
