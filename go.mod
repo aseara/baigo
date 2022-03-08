@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/gorilla/mux v1.8.0
+	github.com/lucasepe/codename v0.2.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/valyala/fasthttp v1.33.0
 	go.uber.org/zap v1.21.0
