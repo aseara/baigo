@@ -35,6 +35,7 @@ func prime(c int) bool {
 	cache := []int{2, 3}
 	e := int(math.Sqrt(float64(c)))
 
+	fmt.Printf("&cache: %p --- &cache[0]: %p --- &cache[1]: %p\n", &cache, &cache[0], &cache[1])
 	fmt.Printf("end of check: %d\n", e)
 
 outer:
