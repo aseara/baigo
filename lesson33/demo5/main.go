@@ -74,5 +74,3 @@ func tryRecv(c <-chan int) (int, bool) {
 		return 0, false
 	}
 }
-
-
