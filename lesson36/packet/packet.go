@@ -49,7 +49,7 @@ func (s *Submit) Encode() ([]byte, error) {
 // SubmitAck packet submitAck
 type SubmitAck struct {
 	ID     string
-	Result uint8
+	Result uint8 // Result result
 }
 
 // Decode SubmitAck decode method
