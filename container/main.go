@@ -11,6 +11,7 @@ import (
 )
 
 // go run main.go cmd args
+// need to run with root user for permition of operat
 func main() {
 	switch os.Args[1] {
 	case "run":
