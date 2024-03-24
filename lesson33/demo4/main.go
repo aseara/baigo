@@ -14,7 +14,7 @@ var (
 func main() {
 	go func() {
 		for i := 0; i < 8; i++ {
-			_job <- (i + 1)
+			_job <- i + 1
 		}
 		close(_job)
 	}()

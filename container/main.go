@@ -46,7 +46,7 @@ func child() {
 	cg()
 
 	_ = syscall.Sethostname([]byte("container-test"))
-	_ = syscall.Chroot("/mnt/e/projector-user/GolandProjects/baigo/container/rootfs/ubuntu-rootfs")
+	_ = syscall.Chroot("/mnt/e/projector-user/rootfs/ubuntu-rootfs")
 	_ = syscall.Chdir("/")
 	_ = syscall.Mount("proc", "proc", "proc", 0, "")
 
